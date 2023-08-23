@@ -19,15 +19,18 @@ class _LoginScreenState extends State<LoginUserPasswordScreen> {
   // NSString * PASS_WORD1 = @"Kunkun";
   // NSString * USER_NAME2 = @"101";
   // NSString * PASS_WORD2 = @"Kunkun12345";
+  // NSString * REALM = @"omi1";
+  // NSString * USER_NAME1 = @"145";
+  // NSString * PASS_WORD1 = @"pHNwX7xRnO";
   //video
   late final TextEditingController _userNameController = TextEditingController()
-    ..text = Platform.isIOS ? '154' : '153';
+    ..text = Platform.isIOS ? '101' : '153';
   late final TextEditingController _passwordController = TextEditingController()
-    ..text = Platform.isIOS ? 'OdJBU8kFlE' : '4grlujhozW';
+    ..text = Platform.isIOS ? 'M1zx7YyK30' : '4grlujhozW';
   late final TextEditingController _serviceUrlController =
-      TextEditingController()..text = 'devtestcallbot';
+      TextEditingController()..text = 'hungth12';
   late final TextEditingController _hostUrlController = TextEditingController()
-    ..text = 'vh.omicrm.com';
+    ..text = 'vh.vihat.omicall';
 
   bool _supportVideoCall = true;
   TextStyle basicStyle = const TextStyle(

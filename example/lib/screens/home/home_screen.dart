@@ -2,6 +2,7 @@
 
 import 'dart:async';
 import 'dart:io';
+import 'dart:convert';
 
 import 'package:calling/local_storage/local_storage.dart';
 import 'package:calling/screens/video_call/video_call_screen.dart';
@@ -50,7 +51,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late final TextEditingController _phoneNumberController =
-      TextEditingController()..text = Platform.isAndroid ? '154' : '153';
+      TextEditingController()..text = Platform.isAndroid ? '154' : '100';
 
   // late final TextEditingController _phoneNumberController =
   // TextEditingController()..text = Platform.isAndroid ? '123aaa' : '122aaa';
@@ -89,7 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    if (Platform.isAndroid) {
+    if (Platform.isAndroid) { 
       checkAndPushToCall();
     }
     updateToken();
@@ -110,27 +111,34 @@ class _HomeScreenState extends State<HomeScreen> {
         return;
       }
       final data = omiAction.data;
+      print("data call zz: $data");
+
       final status = data["status"] as int;
+      final jsonStrCallInfo = data["callInfo"] as String;
+      // Map<String, dynamic> jsonMap = json.decode(callInfo);
+      // OmiCallModel omicall = OmiCallModel.fromJson(jsonMap);
+      print("status call zz: $status -----  ");
+
+      // print("callInfo call zz: $jsonStrCallInfo");
+      // OmiCallModel callInfo = OmiCallModel.fromJson(jsonDecode(jsonStrCallInfo));
+      // print("callInfo call zz22: $callInfo");
+
       if (status == OmiCallState.incoming.rawValue ||
           status == OmiCallState.hold.rawValue) {
-        final transactionId = data["transactionId"];
-        debugPrint("transactionId $transactionId");
-        final callerNumber = data["callerNumber"];
-        final bool isVideo = data["isVideo"];
-        if (isVideo) {
-          pushToVideoScreen(
-            callerNumber,
-            status: status,
-            isOutGoingCall: false,
-          );
-          return;
-        }
-        pushToDialScreen(
-          callerNumber ?? "",
-          status: status,
-          isOutGoingCall: false,
-        );
-        return;
+        // if (callInfo.isVideo) {
+        //   pushToVideoScreen(
+        //     callInfo.callerNumber,
+        //     status: status,
+        //     isOutGoingCall: false,
+        //   );
+        //   return;
+        // }
+        // pushToDialScreen(
+        //   callInfo["callerNumber"],
+        //   status: status,
+        //   isOutGoingCall: false,
+        // );
+        // return;
       }
       if (status == OmiCallState.confirmed.rawValue) {
         if (_dialScreenKey?.currentState != null) {
@@ -429,7 +437,8 @@ class _HomeScreenState extends State<HomeScreen> {
       _isVideoCall,
     );
     EasyLoading.dismiss();
-    if (result == OmiStartCallStatus.startCallSuccess.rawValue) {
+    Map<String, dynamic> resultCall = json.decode(result);
+    if (resultCall["status"] == OmiStartCallStatus.startCallSuccess.rawValue) {
       if (_isVideoCall) {
         pushToVideoScreen(
           phone,
@@ -446,13 +455,13 @@ class _HomeScreenState extends State<HomeScreen> {
     } else {
       EasyDialog(
         title: const Text("Notification"),
-        description: Text("Error code $result"),
+        description: Text("Error code "),
       ).show(context);
     }
-    // OmicallClient.instance.startCallWithUUID(
-    //   phone,
-    //   _isVideoCall,
-    // );
+    OmicallClient.instance.startCallWithUUID(
+      phone,
+      _isVideoCall,
+    );
   }
 
   Future<void> makeCallWithParams(

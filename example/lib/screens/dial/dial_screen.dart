@@ -51,10 +51,13 @@ class DialScreenState extends State<DialScreen> {
     }
     super.initState();
     _subscription =
+
         OmicallClient.instance.callStateChangeEvent.listen((omiAction) {
+      // print("action name   $omiAction");
       if (omiAction.actionName == OmiEventList.onCallStateChanged) {
         final data = omiAction.data;
         final status = data["status"] as int;
+        // print("action status    $status");
         updateDialScreen(status);
         if (status == OmiCallState.disconnected.rawValue) {
           endCall(
@@ -321,7 +324,7 @@ class DialScreenState extends State<DialScreen> {
                         children: [
                           DialButton(
                             iconSrc: "assets/icons/ic_message.svg",
-                            text: "Message",
+                            text: "Bàn Phím",
                             press: () {
                               setState(() {
                                 _isShowKeyboard = !_isShowKeyboard;

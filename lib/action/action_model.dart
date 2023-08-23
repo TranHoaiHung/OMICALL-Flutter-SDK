@@ -20,19 +20,23 @@ class OmiAction {
   }
 }
 
-
 enum OmiCallState {
-  calling,
-  early,
-  connecting,
-  confirmed,
-  incoming,
-  disconnected,
-  hold,
+        unknown, // 0
+       calling, // 1
+       incoming, // 2
+       early, // 3
+       connecting, // 4
+       confirmed, // 5
+       disconnected, // 6
+       hold, // 7
+       disconnecting // 12
 }
 
 extension ExtensionCallState on OmiCallState {
   int get rawValue {
+    if (rawValue == 8){
+      return 12;
+    }
     return index;
   }
 }

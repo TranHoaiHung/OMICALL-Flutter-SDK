@@ -205,23 +205,39 @@ class OmicallsdkPlugin : FlutterPlugin, MethodCallHandler, ActivityAware,
                 val channelId = dataOmi["channelId"] as? String
                 val audioNotificationDescription = dataOmi["audioNotificationDescription"] as? String
                 val videoNotificationDescription = dataOmi["videoNotificationDescription"] as? String
-                OmiClient.instance.configPushNotification(
-                    notificationIcon = notificationIcon ?: "",
-                    prefix = prefix ?: "Cuộc gọi tới từ: ",
-                    incomingBackgroundColor = incomingBackgroundColor ?: "#FFFFFFFF",
-                    incomingAcceptButtonImage = incomingAcceptButtonImage ?: "join_call",
-                    incomingDeclineButtonImage = incomingDeclineButtonImage ?: "hangup",
-                    backImage = backImage ?: "ic_back",
-                    userImage = userImage ?: "",
-                    prefixMissedCallMessage = prefixMissedCallMessage ?: "Cuộc gọi nhỡ từ",
-                    userNameKey = userNameKey ?: "",
-                    channelId = channelId ?: "",
-                    ringtone = null,
-                    fullScreenUserImage = userImage ?: "",
-                    showUserInfoInFullScreen = false,
-                    audioNotificationDescription = audioNotificationDescription,
-                    videoNotificationDescription = videoNotificationDescription
-                )
+//                OmiClient.instance.configPushNotification(
+//                    notificationIcon = notificationIcon ?: "",
+//                    prefix = prefix ?: "Cuộc gọi tới từ: ",
+//                    incomingBackgroundColor = incomingBackgroundColor ?: "#FFFFFFFF",
+//                    incomingAcceptButtonImage = incomingAcceptButtonImage ?: "join_call",
+//                    incomingDeclineButtonImage = incomingDeclineButtonImage ?: "hangup",
+//                    backImage = backImage ?: "ic_back",
+//                    userImage = userImage ?: "",
+//                    prefixMissedCallMessage = prefixMissedCallMessage ?: "Cuộc gọi nhỡ từ",
+//                    userNameKey = userNameKey ?: "",
+//                    channelId = channelId ?: "",
+//                    ringtone = null,
+//                    fullScreenUserImage = userImage ?: "",
+//                    showUserInfoInFullScreen = false,
+//                    audioNotificationDescription = audioNotificationDescription,
+//                    videoNotificationDescription = videoNotificationDescription
+//                )
+
+//                OmiClient.instance.configPushNotification(
+//                    channelId = "fcm_default_channel",
+//                    notificationIcon = "ic_call_status_inbound",
+//                    notificationAvatar = "calling_face",
+//                    fullScreenAvatar = "calling_face",
+//                    deniedCallTitle = "Cuộc gọi đã từ chối từ ",
+//                    showMissedCall = false,
+//                    fullScreenUserImageSize = 96,
+//                    audioNotificationDescription = "Có cuộc gọi audio nè",
+//                    videoNotificationDescription = "Có cuộc gọi video nè",
+//                    notificationDescriptionFontSize = 8F,
+//                    videoCallText = "Gọi Video",
+//                    internalCallText = "Gọi nội bộ",
+//                    inboundCallText = "Cuộc gọi đến",
+//                )
                 result.success(true)
             }
             INIT_CALL_USER_PASSWORD -> {
